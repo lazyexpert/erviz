@@ -144,45 +144,64 @@
     "frp": 4.9,
     "daynight": "D"
   }]
-
+    let entities
     var viewer = new Cesium.Viewer('cesiumContainer', {
-      timeline: false,
-      animation: false
-    })
-    var scene = viewer.scene
-
-    for (let i = 0; i < data.length; i++) {
-      let elem = data[i]
-      var center = Cesium.Cartesian3.fromDegrees(elem.longitude, elem.latitude)
-      var size = 250000.0
-      var ellipse = new Cesium.EllipseGeometry({
-        center,
-        semiMajorAxis : size,
-        semiMinorAxis : size
+          timeline: false,
+        animation: false
       })
-      var geometry = Cesium.EllipseGeometry.createGeometry(ellipse);
-      var instance = new Cesium.GeometryInstance({
-        geometry,
-        id: i,
-        attributes: {
-          color : Cesium.ColorGeometryInstanceAttribute.fromColor(
-            new Cesium.Color(randomColor(), randomColor(), randomColor(), 0.5) // Cesium.Color.BLUE.withAlpha(0.5)
-          )
-        }
-      })
-      scene.primitives.add(new Cesium.Primitive({
-        geometryInstances : instance,
-        appearance : new Cesium.PerInstanceColorAppearance()
-      }));
-
-    }
-    var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
-    handler.setInputAction(function (movement) {
-        var pick = scene.pick(movement.position);
-        console.log(pick.id)
+    function draw() {
+      entities = []
+      var scene = viewer.scene
+      for (let i = 0; i < data.length; i++) {
+        let elem = data[i]
+        var center = Cesium.Cartesian3.fromDegrees(elem.longitude, elem.latitude)
+        var size = 250000.0
+        var ellipse = new Cesium.EllipseGeometry({
+          center,
+          semiMajorAxis : size,
+          semiMinorAxis : size
+        })
+        var instance = new Cesium.GeometryInstance({
+          geometry: ellipse,
+          id: i,
+          attributes: {
+            color : Cesium.ColorGeometryInstanceAttribute.fromColor(
+              new Cesium.Color(randomColor(), randomColor(), randomColor(), 0.5) // Cesium.Color.BLUE.withAlpha(0.5)
+            )
+          }
+        })
+        entities.push(scene.primitives.add(new Cesium.GroundPrimitive({
+          geometryInstances : [instance]
+        })))
+      }
+      var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+      handler.setInputAction(function (movement) {
+            var pick = scene.pick(movement.position);
+            console.log(pick.id)
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    }
+    draw()
 
+    function filter() {
+      for (let i = 0; i < entities.length; i++) {
+        if (i % 2) {
+          entities[i].show = false
+        }
+      }
+    }
 
+    function animate() {
+      let time = 0;
+      setInterval(() => {
+        time++;
+        for (let i = 0; i < data.length; i++) {
+          data[i].latitude += time * 0.01;
+          data[i].longitude += time * 0.01;
+        }
+        viewer.scene.primitives.removeAll()
+        draw()
+      }, 1000)
+    }
   </script>
 </body>
 </html>
