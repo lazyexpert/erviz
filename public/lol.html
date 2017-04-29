@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>Hello World!</title>
   <link rel="stylesheet" href="css/main.css">
-  <title>Document</title>
+  <script src="/Cesium.js"></script>
+  <script src="/bundle.js"></script>
+  <style>
+      @import url(/Widgets/widgets.css);
+      html, body, #cesiumContainer {
+          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+      }
+  </style>
 </head>
 <body class="body-push">
   <h1 class="ola">LOL</h1>
   <nav class="menu" id="theMenu">
-		<div class="menu-wrap">
-			<h1 class="logo"><a href="index.html#home">Minimal</a></h1>
-			<a href="#" class="smoothScroll">OLA</a>
-			<a href="#" class="smoothScroll">OLALA</a>
-			<a href="#" class="smoothScroll">OLALAOLALA</a>
-			<a href="#" class="smoothScroll">OLALAOLALA</a>
-			<a href="#"><i class="icon-facebook"></i></a>
-			<a href="#"><i class="icon-twitter"></i></a>
-			<a href="#"><i class="icon-dribbble"></i></a>
-			<a href="#"><i class="icon-envelope"></i></a>
-		</div>
+    <div class="menu-wrap">
+      <h1 class="logo"><a href="index.html#home">Minimal</a></h1>
+      <a href="#" class="smoothScroll">OLA</a>
+      <a href="#" class="smoothScroll">OLALA</a>
+      <a href="#" class="smoothScroll">OLALAOLALA</a>
+      <a href="#" class="smoothScroll">OLALAOLALA</a>
+      <a href="#"><i class="icon-facebook"></i></a>
+      <a href="#"><i class="icon-twitter"></i></a>
+      <a href="#"><i class="icon-dribbble"></i></a>
+      <a href="#"><i class="icon-envelope"></i></a>
+    </div>
 
-		<!-- Menu button -->
-		<div id="menuToggle" class=""><i class="icon-reorder"></i></div>
-	</nav>
+    <!-- Menu button -->
+    <div id="menuToggle" class=""><i class="icon-reorder"></i></div>
+  </nav>
+  <div id="cesiumContainer"></div>
+  <script>
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+      timeline: false,
+      animation: false
+    })
+    var position = Cesium.Cartesian3.fromDegrees(30.5238000, 50.4546600)
+    var entity = viewer.entities.add({
+      position,
+      ellipse : {
+        semiMinorAxis : 250000.0,
+        semiMajorAxis : 250000.0,
+        material : Cesium.Color.BLUE.withAlpha(0.5)
+      }
+    })
+  </script>
   <script src="bundle.js"></script>
 </body>
 </html>
