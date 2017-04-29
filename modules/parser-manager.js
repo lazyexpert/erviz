@@ -76,7 +76,7 @@ module.exports = class ParserManager {
         newProcess.callback(data);
       newProcess.isBusy = false;
     });
-    this._processes.push(child);
+    this._processes.push(newProcess);
     return newProcess;
   }
 
