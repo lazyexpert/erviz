@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Promise = require('bluebird');
 const bodyParser = require('body-parser');
 mongoose.Promise = Promise;
+const fileUpload = require('express-fileupload');
 
 module.exports = class ExpressBootstrapper {
   constructor(config, middlewares, routes, parserManager) {
@@ -21,6 +22,7 @@ module.exports = class ExpressBootstrapper {
     this._app.use(helmet.hidePoweredBy());
     this._app.use(helmet.xssFilter());
     
+    this._app.use(fileUpload());
     this._app.use(bodyParser.json());
     this._app.use(bodyParser.urlencoded({extended: false}));
 

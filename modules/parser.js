@@ -1,5 +1,6 @@
-console.log("HAHAHA parser running");
-
+const crypto = require('crypto');
+const hash = crypto.createHash('sha256');
+const uuidV1 = require('uuid/v1');
 process.on('message', processData);
 
 let IS_PROCESS_STOPPED = false;
@@ -29,8 +30,21 @@ function processData(data) {
 function start(data) {
   console.log('process job started');
   const items = getItems(data);
+  const schema = createSchema(items[0]); 
+  const token = uuidV1();
+  schema.token = token;
 
-  process.send('Hello');
+  process.send({ data: items.map(el => {
+    const data = [];
+    const keys = Object.keys(el);
+    keys.forEach(key => data.push(el[key]));
+    const dataHash = hash.update(JSON.stringify(data));
+    return {
+      "hash": dataHash,
+      "presetIds" : [],
+      "data": [ -0.381, -160.009, 313.6, 2, 1.4, "2017-04-28", 35, "A", 55, "6.0NRT", 296, 24.1, "D"]
+    };
+  }), schema, token });
   stop();
 }
 
@@ -51,6 +65,32 @@ function getItems(data) {
   }
 
   return maxArray;  
+}
+
+function createSchema(item) {
+  const res = {
+    "meta": {
+      "title": "Example dataSource preset",
+      "createdAt": Date.now(),
+      "description": "Example of the datasource description"
+    },
+    "schema" : {
+
+    }
+  };
+
+  const keys = Object.keys(item);
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    res.schema[key] = {
+      dataType: null,
+      index: i,
+      visibility: false
+    };
+  }
+
+  return res;
 }
 
 const isArray = obj => typeof obj === 'object' && obj.forEach && obj.filter;
