@@ -1,0 +1,93 @@
+{
+  "id": "xxxx",
+  "meta": {
+    "name": "Example dataSource preset",
+    "averageRating": 3,
+    "createdAt": 1457384583,
+    "description": "Example of the datasource description",
+    "viewCount": 785
+  },
+  "scheme": [
+    {
+      "latitude": {
+        "dataType": "LAT",
+        "visibility": true
+      }
+    },
+    {
+      "longitude": {
+        "dataType": "LONG",
+        "visibility": true
+      }
+    },
+    {
+      "satellite": {
+        "dataType": "VALUE",
+        "displayType": "TEXT",
+        "visibility": true
+      }
+    },
+    {
+      "brightness": {
+        "dataType": "INTENSITY",
+        "displayType": "ICON",
+        "color": "#FFAA22",
+        "visibility": true
+      }
+    },
+    {
+      "scan": {
+        "dataType": "VALUE",
+        "visibility": false
+      }
+    },
+    {
+      "track": {
+        "dataType": "VALUE",
+        "visibility": false
+      }
+    },
+    {
+      "acq_date": {
+        "dataType": "DATE",
+        "visibility": false
+      }
+    },
+    {
+      "acq_time": {
+        "dataType": "VALUE",
+        "visibility": false
+      }
+    },
+    {
+      "confidence": {
+        "dataType": "VALUE",
+        "visibility": false
+      }
+    },
+    {
+      "version": {
+        "dataType": "VALUE",
+        "visibility": false
+      }
+    },
+    {
+      "bright_t31": {
+        "dataType": "VALUE",
+        "visibility": false
+      }
+    },
+    {
+      "frp": {
+        "dataType": "VALUE",
+        "visibility": false
+      }
+    },
+    {
+      "daynight": {
+        "dataType": "VALUE",
+        "visibility": false
+      }
+    }
+  ]
+}
