@@ -1,5 +1,9 @@
 {
   "app": {
     "port": 3000
+  },
+  "mongo": {
+    "connectionString": "mongodb://localhost/tars",
+    "poolSize": 100
   }
 }
