@@ -1,5 +1,5 @@
 import "../scss/main.scss"
-import makeDatum from './schemeParser'
+import makeDatum, {getMinMax, normalize} from './schemeParser'
 
 let payload = {
   "id": "xxxx",
@@ -12,21 +12,21 @@ let payload = {
     {
       "latitude": {
         "index": 0,
-        "dataType": "",
+        "dataType": "LATITUDE",
         "visibility": false
       }
     },
     {
       "longitude": {
         "index": 1,
-        "dataType": "",
+        "dataType": "LONGITUDE",
         "visibility": false
       }
     },
     {
       "brightness": {
         "index": 2,
-        "dataType": "",
+        "dataType": "RADIUS",
         "visibility": false
       }
     },
@@ -82,7 +82,7 @@ let payload = {
     {
       "bright_t31": {
         "index": 10,
-        "dataType": "",
+        "dataType": "INTENSITY",
         "visibility": false
       }
     },
@@ -159,13 +159,13 @@ function getGeometry(long, lat, size=250000.00) {
     })
 }
 
-function getInstance(geometry, id, color) {  // color is not being currently used
+function getInstance(geometry, id, color=[0.5, 0.5, 0.5], intensity=0.5) {  // color is not being currently used
     return new Cesium.GeometryInstance({
         geometry,
         id,
         attributes: {
             color : Cesium.ColorGeometryInstanceAttribute.fromColor(
-                new Cesium.Color(randomColor(), randomColor(), randomColor(), 0.5)
+                new Cesium.Color(...color, intensity)
             )
         }
     })
@@ -184,10 +184,20 @@ function initPicker(scene, cb) {
 function draw(data) {
     let entities = []
     let scene = viewer.scene
+    const minMaxRadius = getMinMax(data, '$radius')
+    const minMaxIntensity = getMinMax(data, '$intensity')
+    const MIN_RADIUS = 50000, MAX_RADIUS = 250000
+    const MIN_INTENSITY = 0.3, MAX_INTENSITY = 0.8
     for (let i = 0; i < data.length; i++) {
         let elem = data[i]
-        let ellipse = getGeometry(elem.longitude, elem.latitude)
-        let instance = getInstance(ellipse, i)
+        let radius = MIN_RADIUS + normalize(elem, '$radius', minMaxRadius) * (MAX_RADIUS - MIN_RADIUS)
+        let intensity = MIN_INTENSITY + normalize(elem, '$intensity', minMaxIntensity) * (MAX_INTENSITY - MIN_INTENSITY)
+        let ellipse = getGeometry(
+            elem.$longitude,
+            elem.$latitude,
+            radius
+        )
+        let instance = getInstance(ellipse, i, [1, 0, 0], intensity)
         entities.push(scene.primitives.add(new Cesium.GroundPrimitive({
             geometryInstances : [instance]
         })))
