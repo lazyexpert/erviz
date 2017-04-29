@@ -8,9 +8,15 @@
   <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <title>Hello World!</title>
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="front-source/scss/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&amp;subset=cyrillic-ext" rel="stylesheet">
   <script src="/Cesium.js"></script>
   <script src="/bundle.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="/jquery.nice-select.min.js"></script>
   <style>
       @import url(/Widgets/widgets.css);
       html, body, #cesiumContainer {
@@ -19,29 +25,62 @@
   </style>
 </head>
 <body class="body-push">
-  <h1 class="ola">LOL</h1>
   <nav class="menu" id="theMenu">
-    <div class="menu-wrap">
-      <h1 class="logo"><a href="index.html#home">Minimal</a></h1>
-      <a href="#" class="smoothScroll">OLA</a>
-      <a href="#" class="smoothScroll">OLALA</a>
-      <a href="#" class="smoothScroll">OLALAOLALA</a>
-      <a href="#" class="smoothScroll">OLALAOLALA</a>
-      <a href="#"><i class="icon-facebook"></i></a>
-      <a href="#"><i class="icon-twitter"></i></a>
-      <a href="#"><i class="icon-dribbble"></i></a>
-      <a href="#"><i class="icon-envelope"></i></a>
-    </div>
+		<div class="menu-wrap">
+			<h1>We have got your data!</h1>
+      <p>Assign functionality to fields:</p>
+			<div class="filter-table">
+			  <ul class="filter-table__header">
+			    <li>Field name</li>
+          <li>Function</li>
+          <li>Use</li>
+			  </ul>
+        <ul class="filter-table__body">
+          <li>geocode</li>
+          <li>
+            <select>
+              <option value="1">coordinates</option>
+              <option value="2">ola</option>
+              <option value="3" disabled="">olala</option>
+              <option value="4">olalalalala</option>
+            </select>
+          </li>
+          <li>
+              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1">
+              <label for="styled-checkbox-1"></label>
+          </li>
+        </ul>
+        <ul class="filter-table__body">
+          <li>geocode</li>
+          <li>
+            <select>
+              <option value="1">coordinates</option>
+              <option value="2">ola</option>
+              <option value="3" disabled="">olala</option>
+              <option value="4">olalalalala</option>
+            </select>
+          </li>
+          <li>
+              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1">
+              <label for="styled-checkbox-1"></label>
+          </li>
+        </ul>
+			</div>
+      <button class="menu__button">Start viz magic!</button>
+		</div>
 
-    <!-- Menu button -->
-    <div id="menuToggle" class=""><i class="icon-reorder"></i></div>
-  </nav>
-  <div id="cesiumContainer"></div>
+		<!-- Menu button -->
+		<div id="menuToggle" class="active"><i class="icon-reorder"></i></div>
+	</nav>
+  <div class="switch">
+    <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
+    <label for="cmn-toggle-1"></label>
+  </div>
+  <!-- <div id="cesiumContainer"></div> -->
   <script>
     function randomColor() {
       return Math.random()
     }
-
     const data = [ {
     "latitude": -0.381,
     "longitude": -160.009,
@@ -162,15 +201,11 @@
     "frp": 4.9,
     "daynight": "D"
   }]
-
     var viewer = new Cesium.Viewer('cesiumContainer', {
       timeline: false,
       animation: false
     })
-
-
     var scene = viewer.scene
-
     for (let i = 0; i < data.length; i++) {
       let elem = data[i]
       var center = Cesium.Cartesian3.fromDegrees(elem.longitude, elem.latitude)
@@ -194,16 +229,17 @@
         geometryInstances : instance,
         appearance : new Cesium.PerInstanceColorAppearance()
       }));
-
     }
     var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
     handler.setInputAction(function (movement) {
         var pick = scene.pick(movement.position);
         console.log(pick.id)
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
-
   </script>
-  <script src="bundle.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('select').niceSelect();
+  });
+  </script>
 </body>
 </html>

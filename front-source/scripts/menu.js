@@ -12,11 +12,11 @@ export class Menu {
       if (this.hasClass(menuToggle, 'active')) {
         this.removeClass(menu, "menu-open")
         this.removeClass(menuToggle, "active")
-        this.removeClass(body, "body-push-toleft")
+        this.removeClass(body, "body-push-toright")
       } else {
         this.addClass(menu, "menu-open")
         this.addClass(menuToggle, "active")
-        this.addClass(body, "body-push-toleft")
+        this.addClass(body, "body-push-toright")
       }
     })
   }
