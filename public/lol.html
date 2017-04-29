@@ -72,11 +72,36 @@
 		<!-- Menu button -->
 		<div id="menuToggle" class="active"><i class="icon-reorder"></i></div>
 	</nav>
-  <div class="switch">
+  <!-- <div class="switch">
     <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
     <label for="cmn-toggle-1"></label>
+  </div> -->
+
+  <!-- <div class="hi-block">
+    <div class="hi-block__text">
+      <h1>ERVIZ</h1>
+      <p>create Earth vizualization using your data in json, csv or xls</p>
+    </div>
+
+    <div class="hi-block__form">
+      <label for="">Project name:</label>
+      <input class="first-input" type="text">
+      <label for="">Add description:</label>
+      <textarea type="text"></textarea>
+      <div class="first-btn-container"><button class="hi-block__download-btn">Download dataset</button></div>
+      <div><button class="hi-block__show-btn">Show me Earth!</button></div>
+    </div>
+  </div> -->
+
+  <div class="point-block">
+    <h1>Information about point</h1>
+    <div class="point-block__text">
+      <p class="point-block__title">field4:</p>
+      <p class="point-block__desc">Value value value value value value value value value</p>
+    </div>
   </div>
-  <!-- <div id="cesiumContainer"></div> -->
+
+  <div id="cesiumContainer"></div>
   <script>
     function randomColor() {
       return Math.random()
@@ -233,7 +258,7 @@
     var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
     handler.setInputAction(function (movement) {
         var pick = scene.pick(movement.position);
-        console.log(pick.id)
+        console.log(pick)
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
   </script>
   <script>

@@ -8,6 +8,12 @@ const Routes = require('./modules/routes');
 const ErrorHandler = require('./middlewares/error-handler');
 const ParserManager = require('./modules/parser-manager');
 
+const DataSourceModel = require('./models/data-source-model');
+const PresetModel = require('./models/preset-model');
+
+const dataSourceModel = new DataSourceModel(config.mongo.connectionString);
+const presetModel = new PresetModel(config.mongo.connectionString);
+
 const parserManager = new ParserManager();
 const errorHandler = new ErrorHandler();
 const routes = new Routes();
