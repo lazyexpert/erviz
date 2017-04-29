@@ -1,91 +1,99 @@
 {
   "id": "xxxx",
   "meta": {
-    "name": "Example dataSource preset",
-    "averageRating": 3,
+    "title": "Example dataSource preset",
     "createdAt": 1457384583,
     "description": "Example of the datasource description",
-    "viewCount": 785
   },
   "scheme": [
     {
       "latitude": {
-        "dataType": "LAT",
-        "visibility": true
+        "index": 0,
+        "dataType": "",
+        "visibility": false
       }
     },
     {
       "longitude": {
-        "dataType": "LONG",
-        "visibility": true
-      }
-    },
-    {
-      "satellite": {
-        "dataType": "VALUE",
-        "displayType": "TEXT",
-        "visibility": true
+        "index": 1,
+        "dataType": "",
+        "visibility": false
       }
     },
     {
       "brightness": {
-        "dataType": "INTENSITY",
-        "displayType": "ICON",
-        "color": "#FFAA22",
-        "visibility": true
+        "index": 2,
+        "dataType": "",
+        "visibility": false
       }
     },
     {
       "scan": {
-        "dataType": "VALUE",
+        "index": 3,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "track": {
-        "dataType": "VALUE",
+        "index": 4,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "acq_date": {
-        "dataType": "DATE",
+        "index": 5,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "acq_time": {
-        "dataType": "VALUE",
+        "index": 6,
+        "dataType": "",
+        "visibility": false
+      }
+    },
+    {
+      "satellite": {
+        "index": 7,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "confidence": {
-        "dataType": "VALUE",
+        "index": 8,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "version": {
-        "dataType": "VALUE",
+        "index": 9,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "bright_t31": {
-        "dataType": "VALUE",
+        "index": 10,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "frp": {
-        "dataType": "VALUE",
+        "index": 11,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "daynight": {
-        "dataType": "VALUE",
+        "index": 12,
+        "dataType": "",
         "visibility": false
       }
     }
