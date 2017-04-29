@@ -8,90 +8,92 @@
   "scheme": [
     {
       "latitude": {
-        "dataType": "LAT",
         "index": 0,
-        "visibility": true
+        "dataType": "",
+        "visibility": false
       }
     },
     {
       "longitude": {
-        "dataType": "LONG",
         "index": 1,
-        "visibility": true
-      }
-    },
-    {
-      "satellite": {
-        "dataType": "VALUE",
-        "index": 2,
-        "displayType": "TEXT",
-        "visibility": true
+        "dataType": "",
+        "visibility": false
       }
     },
     {
       "brightness": {
-        "dataType": "INTENSITY",
-        "index": 3,
-        "displayType": "ICON",
-        "color": "#FFAA22",
-        "visibility": true
+        "index": 2,
+        "dataType": "",
+        "visibility": false
       }
     },
     {
       "scan": {
-        "dataType": "VALUE",
-        "index": 4,
+        "index": 3,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "track": {
-        "dataType": "VALUE",
-        "index": 5,
+        "index": 4,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "acq_date": {
-        "dataType": "DATE",
-        "index": 6,
+        "index": 5,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "acq_time": {
-        "dataType": "VALUE",
+        "index": 6,
+        "dataType": "",
+        "visibility": false
+      }
+    },
+    {
+      "satellite": {
         "index": 7,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "confidence": {
-        "dataType": "VALUE",
+        "index": 8,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "version": {
-        "dataType": "VALUE",
+        "index": 9,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "bright_t31": {
-        "dataType": "VALUE",
+        "index": 10,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "frp": {
-        "dataType": "VALUE",
+        "index": 11,
+        "dataType": "",
         "visibility": false
       }
     },
     {
       "daynight": {
-        "dataType": "VALUE",
+        "index": 12,
+        "dataType": "",
         "visibility": false
       }
     }

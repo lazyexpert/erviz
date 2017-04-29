@@ -1,5 +1,5 @@
 node_modules
 .vscode
 npm-debug.log
-pubic/bundle.js
+public/bundle.js
 .idea/
