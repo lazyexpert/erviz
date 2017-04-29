@@ -3,23 +3,31 @@ class DatumObject {
         this.datum = datum
         this.scheme = {}
         this.latitudeField = null
+        this.hasLatitude = false
         this.longitudeField = null
+        this.hasLongitude = false
         this.intensityField = null
+        this.hasIntensity = false
         this.radiusField = null
+        this.hasRadius = false
         for (let field of scheme) {
             let key = Reflect.ownKeys(field)[0]
             this.scheme[key] = field[key]
             switch (field[key].dataType) {
             case 'LATITUDE':
+                this.hasLatitude = true
                 this.latitudeField = field[key]
 
             case 'LONGITUDE':
+                this.hasLongitude = true
                 this.longitudeField = field[key]
 
             case 'INTENSITY':
+                this.hasIntensity = true
                 this.intensityField = field[key]
 
             case 'RADIUS':
+                this.hasRadius = true
                 this.radiusField = field[key]
             }
         }

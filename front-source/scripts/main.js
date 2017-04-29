@@ -184,14 +184,30 @@ function initPicker(scene, cb) {
 function draw(data) {
     let entities = []
     let scene = viewer.scene
-    const minMaxRadius = getMinMax(data, '$radius')
-    const minMaxIntensity = getMinMax(data, '$intensity')
+    let minMaxRadius, minMaxIntensity
+    if (data[0].hasRadius) {
+       minMaxRadius = getMinMax(data, '$radius')
+    }
+    if (data[0].hasIntensity) {
+        minMaxIntensity = getMinMax(data, '$intensity')
+    }
     const MIN_RADIUS = 50000, MAX_RADIUS = 250000
     const MIN_INTENSITY = 0.3, MAX_INTENSITY = 0.8
     for (let i = 0; i < data.length; i++) {
         let elem = data[i]
-        let radius = MIN_RADIUS + normalize(elem, '$radius', minMaxRadius) * (MAX_RADIUS - MIN_RADIUS)
-        let intensity = MIN_INTENSITY + normalize(elem, '$intensity', minMaxIntensity) * (MAX_INTENSITY - MIN_INTENSITY)
+        if (!elem.$latitude || !elem.$longitude) {
+            continue
+        }
+        let radius = (
+            elem.hasRadius ?
+            MIN_RADIUS + normalize(elem, '$radius', minMaxRadius) * (MAX_RADIUS - MIN_RADIUS) :
+            undefined
+        )
+        let intensity = (
+            elem.hasIntensity ?
+            MIN_INTENSITY + normalize(elem, '$intensity', minMaxIntensity) * (MAX_INTENSITY - MIN_INTENSITY) :
+            undefined
+        )
         let ellipse = getGeometry(
             elem.$longitude,
             elem.$latitude,
