@@ -1,27 +1,34 @@
 const path = require('path');
 const express = require('express');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
+const Promise = require('bluebird');
+mongoose.Promise = Promise;
 
 module.exports = class ExpressBootstrapper {
-  constructor(port, middlewares, routes) {
+  constructor(config, middlewares, routes, parserManager) {
     this._app = express();
     this._middlewares = middlewares;
     this._routes = routes;
-    this._port = port;
+    this._config = config;
+    this._parserManager = parserManager;
+
+    this.start = Promise.coroutine(this.start.bind(this));
   }
 
-  start(onload) {
+  *start(onload) {
     this._app.use(helmet.hidePoweredBy());
     this._app.use(helmet.xssFilter());
 
+    mongoose.createConnection(this._config.mongo.connectionString, { server: { poolSize: this._config.mongo.poolSize }});
     this._app.use(express.static('public'));
 
     this._initMiddlewares();
-    this._routes.init(this._app);
-    this._app.listen(this._port, onload);
+    this._routes.init(this._app, this._parserManager);
+    this._app.listen(this._config.app.port, onload);
   }
 
   _initMiddlewares() {
-    this._middlewares.forEach(middleware => this._app.use(middleware));
+    this._middlewares.forEach(middleware => this._app.use(middleware.handler));
   }
 };
