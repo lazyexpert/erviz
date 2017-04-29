@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const hash = crypto.createHash('sha256');
-
+const uuidV1 = require('uuid/v1');
 process.on('message', processData);
 
 let IS_PROCESS_STOPPED = false;
@@ -28,11 +28,11 @@ function processData(data) {
  * 4) return new schema and data, corresponding to it
  */
 function start(data) {
-  console.log(data);
   console.log('process job started');
   const items = getItems(data);
-  console.log(items);
   const schema = createSchema(items[0]); 
+  const token = uuidV1();
+  schema.token = token;
 
   process.send({ data: items.map(el => {
     const data = [];
@@ -44,7 +44,7 @@ function start(data) {
       "presetIds" : [],
       "data": [ -0.381, -160.009, 313.6, 2, 1.4, "2017-04-28", 35, "A", 55, "6.0NRT", 296, 24.1, "D"]
     };
-  }), schema });
+  }), schema, token });
   stop();
 }
 
