@@ -1,3 +1,3 @@
-import "../css/main.scss"
+import "../scss/main.scss";
 
-console.log("ola")
+console.log("ola");

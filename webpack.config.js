@@ -12,7 +12,7 @@ module.exports = {
     loaders: [
       {
         loader: 'babel-loader',
-        test: path.join(__dirname, 'es6'),
+        test: path.join(__dirname, 'front-source/scripts'),
         query: {
           presets: 'es2015',
         },
