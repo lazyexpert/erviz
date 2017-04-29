@@ -11,8 +11,8 @@ module.exports = class ParserManager {
     this._saveAllDataModels = Promise.coroutine(this._saveAllDataModels.bind(this));
   }
 
-  process(data, res, next) {
-    const process = this._getProcess(res, next);
+  process(data, res) {
+    const process = this._getProcess(res);
     process.callback = function(response) {
       const dataForResponse = response.data.map(el => el.data);
 
@@ -22,7 +22,20 @@ module.exports = class ParserManager {
       process.res.send({ data: dataForResponse, schema: response.schema });
     };
     process.start(data);
-   
+  }
+
+  processFile(data, res) {
+    const process = this._getProcess(res);
+    process.callback = function(response) {
+      const dataForResponse = response.data.map(el => el.data);
+
+       // TODO: save preset to database, get Id.
+       // call  this._saveAllDataModels()
+
+      // process.res.send({ data: dataForResponse, schema: response.schema });
+      process.res.redirect('/lol.html');
+    };
+    process.start(data);
   }
 
   /**
@@ -33,12 +46,11 @@ module.exports = class ParserManager {
    * {
    *  isBusy: boolean,
    *  res: ResObj,
-   *  next: NextObj,
    *  process: ChildProcess,
    *  start: Function
    * }
    */
-  _getProcess(res, next) {
+  _getProcess(res) {
     const filtered = this._processes.filter(el => !el.isBusy);    
     if (filtered.length) return filtered[0];
 
@@ -46,7 +58,6 @@ module.exports = class ParserManager {
     const newProcess = {
       isBusy: false,
       res,
-      next,
       process: child,
       start: function(data) {
         this.process.send({ cmd: 'start', data });
@@ -55,8 +66,8 @@ module.exports = class ParserManager {
     };
 
     newProcess.process.on('error', err => {
-      newProcess.next(err);
       newProcess.send({ cmd: 'stop' })
+      throw err;      
     });
 
     newProcess.process.on('message', data => {
