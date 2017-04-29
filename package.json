@@ -36,6 +36,7 @@
   "homepage": "https://github.com/lazyexpert/tars#readme",
   "dependencies": {
     "express": "^4.15.2",
-    "helmet": "^3.5.0"
+    "helmet": "^3.5.0",
+    "mongoose": "^4.9.6"
   }
 }
