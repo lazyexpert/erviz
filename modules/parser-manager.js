@@ -11,18 +11,30 @@ module.exports = class ParserManager {
     this._saveAllDataModels = Promise.coroutine(this._saveAllDataModels.bind(this));
   }
 
-  process(data, res, next) {
-    const process = this._getProcess(res, next);
-    process.callback = function(response) {
+  process(data, res) {
+    const myProcess = this._getProcess(res);
+    myProcess.callback = function(response) {
       const dataForResponse = response.data.map(el => el.data);
 
-       // TODO: save preset to database, get Id.
-       // call  this._saveAllDataModels()
+      // TODO: save preset to database, get Id.
+      // call  this._saveAllDataModels()
 
-      process.res.send({ data: dataForResponse, schema: response.schema });
+      myProcess.res.send({ data: dataForResponse, schema: response.schema, token: response.token });
     };
-    process.start(data);
-   
+    myProcess.start(data);
+  }
+
+  processFile(data, res) {
+    const myProcess = this._getProcess(res);
+    myProcess.callback = function(response) {
+      const dataForResponse = response.data.map(el => el.data);
+
+      // TODO: save preset to database, get Id.
+      // call  this._saveAllDataModels()
+
+      res.render('lol', { response: JSON.stringify({ data: dataForResponse, schema: response.schema, token: response.token }) })
+    };
+    myProcess.start(data);
   }
 
   /**
@@ -33,12 +45,11 @@ module.exports = class ParserManager {
    * {
    *  isBusy: boolean,
    *  res: ResObj,
-   *  next: NextObj,
    *  process: ChildProcess,
    *  start: Function
    * }
    */
-  _getProcess(res, next) {
+  _getProcess(res) {
     const filtered = this._processes.filter(el => !el.isBusy);    
     if (filtered.length) return filtered[0];
 
@@ -46,7 +57,6 @@ module.exports = class ParserManager {
     const newProcess = {
       isBusy: false,
       res,
-      next,
       process: child,
       start: function(data) {
         this.process.send({ cmd: 'start', data });
@@ -55,8 +65,8 @@ module.exports = class ParserManager {
     };
 
     newProcess.process.on('error', err => {
-      newProcess.next(err);
       newProcess.send({ cmd: 'stop' })
+      throw err;      
     });
 
     newProcess.process.on('message', data => {

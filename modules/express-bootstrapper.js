@@ -22,6 +22,7 @@ module.exports = class ExpressBootstrapper {
     this._app.use(helmet.hidePoweredBy());
     this._app.use(helmet.xssFilter());
     
+    this._app.set('view engine', 'ejs');  
     this._app.use(fileUpload());
     this._app.use(bodyParser.json());
     this._app.use(bodyParser.urlencoded({extended: false}));
