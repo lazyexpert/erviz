@@ -7,8 +7,7 @@ module.exports = class Routes {
     });
 
     app.post('/api/source-data/', (req, res, next) => {
-      const data = req.body.data;
-      parserManager.process(data, res, next);      
+      parserManager.process(req.body, res, next);      
     })
   }
 };
