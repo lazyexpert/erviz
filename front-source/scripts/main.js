@@ -27,7 +27,7 @@ function getInstance(geometry, id, color=[0.55, 0.45, 0.7], intensity=0.5) {
         id,
         attributes: {
             color : Cesium.ColorGeometryInstanceAttribute.fromColor(
-                new Cesium.Color(1, 0, 0, 1)
+                new Cesium.Color(...color, intensity)
             )
         }
     })
@@ -127,5 +127,8 @@ function animate() {
     let data = payload.data.map(x => makeDatum(x, payload.schema.schema))
     window.data = data
     draw(data)
-    initPicker(viewer.scene, (selected_) => {selected = selected_})
+    initPicker(viewer.scene, (selected_) => {
+        selected = selected_
+        console.log(selected)
+    })
 })()
