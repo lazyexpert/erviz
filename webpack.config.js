@@ -38,7 +38,7 @@ module.exports = {
       include: /bundle.js$/,
       minimize: true
     })
-  ]
+  ],
   // Create Sourcemaps for the bundle
-  // devtool: 'source-map',
+  devtool: 'source-map',
 };
