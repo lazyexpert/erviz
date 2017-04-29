@@ -40,9 +40,9 @@ function start(data) {
     keys.forEach(key => data.push(el[key]));
     const dataHash = hash.update(JSON.stringify(data));
     return {
-      "hash": dataHash,
-      "presetIds" : [],
-      "data": [ -0.381, -160.009, 313.6, 2, 1.4, "2017-04-28", 35, "A", 55, "6.0NRT", 296, 24.1, "D"]
+      hash: dataHash,
+      presetIds : [],
+      data: data
     };
   }), schema, token });
   stop();
@@ -74,9 +74,7 @@ function createSchema(item) {
       "createdAt": Date.now(),
       "description": "Example of the datasource description"
     },
-    "schema" : {
-
-    }
+    "schema" : { }
   };
 
   const keys = Object.keys(item);

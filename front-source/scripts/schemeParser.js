@@ -36,16 +36,29 @@ class DatumObject {
     get(key) {
         switch (key) {
         case '$latitude':
-            return this.datum[this.latitudeField.index]
+            if (this.hasLatitude)
+                return this.datum[this.latitudeField.index]
+            else
+                return null
 
         case '$longitude':
-            return this.datum[this.longitudeField.index]
+            if (this.hasLongitude)
+                return this.datum[this.longitudeField.index]
+            else
+                return null
 
         case '$radius':
-            return this.datum[this.radiusField.index]
+            if (this.hasRadius) {
+                return this.datum[this.radiusField.index]
+            } else {
+                return null
+            }
 
         case '$intensity':
-            return this.datum[this.intensityField.index]
+            if (this.hasIntensity)
+                return this.datum[this.intensityField.index]
+            else
+                return null
 
         default:
             return this.datum[this.scheme[key].index]
@@ -59,7 +72,9 @@ class DatumObject {
 
 const __meta__ = {
     get: function(target, property) {
-        return target.get(property)
+        if (property.startsWith('$'))
+            return target.get(property)
+        return Reflect.get(target, property)
     },
 
     set: function (taget, property, value) {
@@ -76,6 +91,7 @@ export function getMinMax(data, field) {
     let minIndex = 0, maxIndex = 0;
     for (let i = 0; i < data.length; i++) {
         let elem = data[i]
+        if (!elem[field]) continue
         if (elem[field] < data[minIndex][field]) {
             minIndex = i
         }

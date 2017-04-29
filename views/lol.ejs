@@ -3,12 +3,16 @@
 <head>
   <!-- Use correct character set. -->
   <meta charset="utf-8">
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
   <!-- Tell IE to use the latest, best version. -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <title>Hello World!</title>
-  <link rel="stylesheet" href="front-source/scss/main.css">
+  <link rel="stylesheet" href="/front-source/scss/main.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&amp;subset=cyrillic-ext" rel="stylesheet">
   <script src="/Cesium.js"></script>
   <script src="/bundle.js"></script>
@@ -103,168 +107,13 @@
 
   <div id="cesiumContainer"></div>
   <script>
-    function randomColor() {
-      return Math.random()
-    }
-    const data = [ {
-    "latitude": -0.381,
-    "longitude": -160.009,
-    "brightness": 313.6,
-    "scan": 2,
-    "track": 1.4,
-    "acq_date": "2017-04-28",
-    "acq_time": 35,
-    "satellite": "A",
-    "confidence": 55,
-    "version": "6.0NRT",
-    "bright_t31": 296,
-    "frp": 24.1,
-    "daynight": "D"
-  },
-  {
-    "latitude": -0.381,
-    "longitude": -160.009,
-    "brightness": 313.6,
-    "scan": 2,
-    "track": 1.4,
-    "acq_date": "2017-04-28",
-    "acq_time": 35,
-    "satellite": "A",
-    "confidence": 55,
-    "version": "6.0NRT",
-    "bright_t31": 296,
-    "frp": 24.1,
-    "daynight": "D"
-  },
-  {
-    "latitude": -12.985,
-    "longitude": 141.686,
-    "brightness": 319.7,
-    "scan": 1.1,
-    "track": 1,
-    "acq_date": "2017-04-28",
-    "acq_time": 100,
-    "satellite": "T",
-    "confidence": 76,
-    "version": "6.0NRT",
-    "bright_t31": 290.8,
-    "frp": 15.1,
-    "daynight": "D"
-  },
-  {
-    "latitude": -12.986,
-    "longitude": 141.696,
-    "brightness": 315.2,
-    "scan": 1.1,
-    "track": 1,
-    "acq_date": "2017-04-28",
-    "acq_time": 100,
-    "satellite": "T",
-    "confidence": 70,
-    "version": "6.0NRT",
-    "bright_t31": 291.6,
-    "frp": 10.3,
-    "daynight": "D"
-  },
-  {
-    "latitude": -12.991,
-    "longitude": 141.689,
-    "brightness": 326.6,
-    "scan": 1.1,
-    "track": 1,
-    "acq_date": "2017-04-28",
-    "acq_time": 100,
-    "satellite": "T",
-    "confidence": 82,
-    "version": "6.0NRT",
-    "bright_t31": 292.9,
-    "frp": 23.1,
-    "daynight": "D"
-  },
-  {
-    "latitude": -14.277,
-    "longitude": 130.909,
-    "brightness": 309.3,
-    "scan": 3.1,
-    "track": 1.7,
-    "acq_date": "2017-04-28",
-    "acq_time": 100,
-    "satellite": "T",
-    "confidence": 48,
-    "version": "6.0NRT",
-    "bright_t31": 287.2,
-    "frp": 25.1,
-    "daynight": "D"
-  },
-  {
-    "latitude": -15.605,
-    "longitude": 131.288,
-    "brightness": 314.5,
-    "scan": 2.7,
-    "track": 1.6,
-    "acq_date": "2017-04-28",
-    "acq_time": 100,
-    "satellite": "T",
-    "confidence": 60,
-    "version": "6.0NRT",
-    "bright_t31": 287.8,
-    "frp": 27.5,
-    "daynight": "D"
-  },
-  {
-    "latitude": -16.775,
-    "longitude": 137.482,
-    "brightness": 311.6,
-    "scan": 1.1,
-    "track": 1,
-    "acq_date": "2017-04-28",
-    "acq_time": 100,
-    "satellite": "T",
-    "confidence": 43,
-    "version": "6.0NRT",
-    "bright_t31": 300.2,
-    "frp": 4.9,
-    "daynight": "D"
-  }]
-    var viewer = new Cesium.Viewer('cesiumContainer', {
-      timeline: false,
-      animation: false
-    })
-    var scene = viewer.scene
-    for (let i = 0; i < data.length; i++) {
-      let elem = data[i]
-      var center = Cesium.Cartesian3.fromDegrees(elem.longitude, elem.latitude)
-      var size = 250000.0
-      var ellipse = new Cesium.EllipseGeometry({
-        center,
-        semiMajorAxis : size,
-        semiMinorAxis : size
-      })
-      var geometry = Cesium.EllipseGeometry.createGeometry(ellipse);
-      var instance = new Cesium.GeometryInstance({
-        geometry,
-        id: i,
-        attributes: {
-          color : Cesium.ColorGeometryInstanceAttribute.fromColor(
-            new Cesium.Color(randomColor(), randomColor(), randomColor(), 0.5) // Cesium.Color.BLUE.withAlpha(0.5)
-          )
-        }
-      })
-      scene.primitives.add(new Cesium.Primitive({
-        geometryInstances : instance,
-        appearance : new Cesium.PerInstanceColorAppearance()
-      }));
-    }
-    var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
-    handler.setInputAction(function (movement) {
-        var pick = scene.pick(movement.position);
-        console.log(pick)
-      }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-  </script>
-  <script>
   $(document).ready(function() {
     $('select').niceSelect();
   });
   </script>
+  <script type="text/javascript">
+    window.responseObject = <%- response %>;
+  </script>
+  <script src="/bundle.js" defer></script>
 </body>
 </html>

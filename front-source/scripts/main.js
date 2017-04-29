@@ -168,7 +168,7 @@ function getGeometry(long, lat, size=250000.00) {
     })
 }
 
-function getInstance(geometry, id, color=[0.55, 0.45, 0.7], intensity=0.5) {  // color is not being currently used
+function getInstance(geometry, id, color=[0.55, 0.45, 0.7], intensity=0.5) {
     return new Cesium.GeometryInstance({
         geometry,
         id,
@@ -204,7 +204,7 @@ function draw(data) {
     const MIN_INTENSITY = 0.3, MAX_INTENSITY = 0.8
     for (let i = 0; i < data.length; i++) {
         let elem = data[i]
-        if (!elem.$latitude || !elem.$longitude) {
+        if (!elem.hasLatitude || !elem.hasLongitude) {
             continue
         }
         let radius = (
@@ -212,11 +212,13 @@ function draw(data) {
             MIN_RADIUS + normalize(elem, '$radius', minMaxRadius) * (MAX_RADIUS - MIN_RADIUS) :
             undefined
         )
+        console.log(radius)
         let intensity = (
             elem.hasIntensity ?
             MIN_INTENSITY + normalize(elem, '$intensity', minMaxIntensity) * (MAX_INTENSITY - MIN_INTENSITY) :
             undefined
         )
+        console.log(intensity)
         let ellipse = getGeometry(
             elem.$longitude,
             elem.$latitude,
@@ -260,7 +262,6 @@ function animate() {
 (function main() {
     let selected = null
     let data = payload.data.map(x => makeDatum(x, payload.scheme))
-    console.log(data)
     draw(data)
     initPicker(viewer.scene, (selected_) => {
       selected = selected_

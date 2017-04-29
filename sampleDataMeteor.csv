@@ -1,4 +1,4 @@
-name,id,recclass,mass (g),fall,year,reclat,reclong
+name,id,recclass,mass,fall,year,reclat,reclong
 Aachen,1,L5,21,Fell,01/01/1880 12:00:00 AM,50.775000,6.083330
 Aarhus,2,H6,720,Fell,01/01/1951 12:00:00 AM,56.183330,10.233330
 Abee,6,EH4,107000,Fell,01/01/1952 12:00:00 AM,54.216670,-113.000000
