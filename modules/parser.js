@@ -74,9 +74,7 @@ function createSchema(item) {
       "createdAt": Date.now(),
       "description": "Example of the datasource description"
     },
-    "schema" : {
-
-    }
+    "schema" : { }
   };
 
   const keys = Object.keys(item);

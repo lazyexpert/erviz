@@ -1,12 +1,12 @@
 const ModelBase = require('./base-model');
 
 const modelFactory = connection => {
-  return connection.model('Event', {
+  return connection.model('DataSource', {
     
   });
 };
 
-module.exports = class EventModel extends ModelBase {
+module.exports = class DataSourceModel extends ModelBase {
   constructor(connectionString) {
     super(connectionString, modelFactory);
   }
