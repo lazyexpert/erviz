@@ -125,7 +125,6 @@ function randomColor() {
     return Math.random()
 }
 
-let entities
 let viewer = new Cesium.Viewer('cesiumContainer', {
     timeline: false,
     animation: false
@@ -152,12 +151,14 @@ function getInstance(geometry, id, color) {  // color is not being currently use
     })
 }
 
-function initPicker(scene) {
-    var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+function initPicker(scene, cb) {
+    var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas)
     handler.setInputAction(function (movement) {
-        var pick = scene.pick(movement.position);
-        console.log(pick.id)
-    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+        let pick = scene.pick(movement.position)
+        if (cb) {
+            cb(pick.id)
+        }
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 }
 
 function draw(data) {
@@ -197,7 +198,7 @@ function animate() {
 
 
 (function main() {
+    let selected = null
     draw(data)
-    initPicker(viewer.scene)
-    animate()
+    initPicker(viewer.scene, (selected_) => {selected = selected_})
 })()
