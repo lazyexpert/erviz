@@ -159,7 +159,7 @@ function getGeometry(long, lat, size=250000.00) {
     })
 }
 
-function getInstance(geometry, id, color=[0.5, 0.5, 0.5], intensity=0.5) {  // color is not being currently used
+function getInstance(geometry, id, color=[0.55, 0.45, 0.7], intensity=0.5) {  // color is not being currently used
     return new Cesium.GeometryInstance({
         geometry,
         id,
@@ -197,7 +197,7 @@ function draw(data) {
             elem.$latitude,
             radius
         )
-        let instance = getInstance(ellipse, i, [1, 0, 0], intensity)
+        let instance = getInstance(ellipse, i, [0.54, 0.45, 0.69], intensity)
         entities.push(scene.primitives.add(new Cesium.GroundPrimitive({
             geometryInstances : [instance]
         })))
@@ -213,6 +213,11 @@ function filter() {
     }
 }
 
+
+function clear() {
+    viewer.scene.primitives.removeAll()
+}
+
 function animate() {
     let time = 0;
     setInterval(() => {
@@ -221,7 +226,7 @@ function animate() {
             data[i].latitude += time * 0.01;
             data[i].longitude += time * 0.01;
         }
-        viewer.scene.primitives.removeAll()
+        clear()
         draw(data)
     }, 1000)
 }
