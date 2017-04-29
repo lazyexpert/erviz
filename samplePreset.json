@@ -1,28 +1,29 @@
 {
   "id": "xxxx",
   "meta": {
-    "name": "Example dataSource preset",
-    "averageRating": 3,
+    "title": "Example dataSource preset",
     "createdAt": 1457384583,
-    "description": "Example of the datasource description",
-    "viewCount": 785
+    "description": "Example of the datasource description"
   },
   "scheme": [
     {
       "latitude": {
         "dataType": "LAT",
+        "index": 0,
         "visibility": true
       }
     },
     {
       "longitude": {
         "dataType": "LONG",
+        "index": 1,
         "visibility": true
       }
     },
     {
       "satellite": {
         "dataType": "VALUE",
+        "index": 2,
         "displayType": "TEXT",
         "visibility": true
       }
@@ -30,6 +31,7 @@
     {
       "brightness": {
         "dataType": "INTENSITY",
+        "index": 3,
         "displayType": "ICON",
         "color": "#FFAA22",
         "visibility": true
@@ -38,24 +40,28 @@
     {
       "scan": {
         "dataType": "VALUE",
+        "index": 4,
         "visibility": false
       }
     },
     {
       "track": {
         "dataType": "VALUE",
+        "index": 5,
         "visibility": false
       }
     },
     {
       "acq_date": {
         "dataType": "DATE",
+        "index": 6,
         "visibility": false
       }
     },
     {
       "acq_time": {
         "dataType": "VALUE",
+        "index": 7,
         "visibility": false
       }
     },
