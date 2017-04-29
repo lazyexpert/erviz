@@ -3,6 +3,10 @@
 <head>
   <!-- Use correct character set. -->
   <meta charset="utf-8">
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
   <!-- Tell IE to use the latest, best version. -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
@@ -17,10 +21,7 @@
   </style>
 </head>
 <body>
-  <form>
-    <textarea></textarea>
-  </form>
-  <div id="cesiumContainer" hidden></div>
+  <div id="cesiumContainer"></div>
   <script src="/bundle.js" defer></script>
   <script type="text/javascript">
     window.responseObject = <%- response %>;
