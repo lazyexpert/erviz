@@ -3,7 +3,7 @@ const formidable = require('formidable');
 const promisify = require('promisify-node');
 const Promise = require('bluebird');
 const fs = promisify('fs');
-const csv = require('csvtojson');
+const csvjson = require('csvjson');
 
 module.exports = class Routes {
   init(app, parserManager) {
@@ -25,15 +25,11 @@ module.exports = class Routes {
       const data = JSON.parse(req.files.sampleFile.data.toString());
       return parserManager.processFile(data, res);
     } else if (/csv/.test(req.files.sampleFile.name)) {
-      const result = [];
-      csv({noheader:true})
-        .fromString(req.files.sampleFile.data.toString())
-        .on('csv', row =>{ // this func will be called 3 times
-          result.push(row); 
-        })
-        .on('done', () => {
-          return parserManager.processFile(result, res);  
-        })
+      const options = {
+        delimiter : ','
+      };
+      const data = csvjson.toSchemaObject(req.files.sampleFile.data.toString(), options);
+      return parserManager.processFile(data, res);
     } else {
       res.status(400).send({message: 'Bad mimetype. Support: csv/json'});
     }
