@@ -52,6 +52,8 @@ module.exports = class ParserManager {
     });
 
     newProcess.process.on('message', data => {
+      console.log('Main: received message from child.')
+
       if (newProcess.callback)
         newProcess.callback(data);
       newProcess.isBusy = false;

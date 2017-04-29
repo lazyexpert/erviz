@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
+const bodyParser = require('body-parser');
 mongoose.Promise = Promise;
 
 module.exports = class ExpressBootstrapper {
@@ -19,6 +20,9 @@ module.exports = class ExpressBootstrapper {
   *start(onload) {
     this._app.use(helmet.hidePoweredBy());
     this._app.use(helmet.xssFilter());
+    
+    this._app.use(bodyParser.json());
+    this._app.use(bodyParser.urlencoded({extended: false}));
 
     mongoose.createConnection(this._config.mongo.connectionString, { server: { poolSize: this._config.mongo.poolSize }});
     this._app.use(express.static('public'));
