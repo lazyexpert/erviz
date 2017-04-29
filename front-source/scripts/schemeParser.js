@@ -10,25 +10,24 @@ class DatumObject {
         this.hasIntensity = false
         this.radiusField = null
         this.hasRadius = false
-        for (let field of scheme) {
-            let key = Reflect.ownKeys(field)[0]
-            this.scheme[key] = field[key]
-            switch (field[key].dataType) {
+        for (let key of Reflect.ownKeys(scheme)) {
+            this.scheme[key] = scheme[key]
+            switch (scheme[key].dataType) {
             case 'LATITUDE':
                 this.hasLatitude = true
-                this.latitudeField = field[key]
+                this.latitudeField = scheme[key]
 
             case 'LONGITUDE':
                 this.hasLongitude = true
-                this.longitudeField = field[key]
+                this.longitudeField = scheme[key]
 
             case 'INTENSITY':
                 this.hasIntensity = true
-                this.intensityField = field[key]
+                this.intensityField = scheme[key]
 
             case 'RADIUS':
                 this.hasRadius = true
-                this.radiusField = field[key]
+                this.radiusField = scheme[key]
             }
         }
     }
@@ -104,5 +103,6 @@ export function getMinMax(data, field) {
 
 export function normalize(elem, field, minMax) {
     let [min, max] = minMax
+    if (max == min) return 0
     return (elem[field] - min) / (max - min)
 }
