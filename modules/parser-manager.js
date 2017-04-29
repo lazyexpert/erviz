@@ -16,8 +16,8 @@ module.exports = class ParserManager {
     myProcess.callback = function(response) {
       const dataForResponse = response.data.map(el => el.data);
 
-       // TODO: save preset to database, get Id.
-       // call  this._saveAllDataModels()
+      // TODO: save preset to database, get Id.
+      // call  this._saveAllDataModels()
 
       myProcess.res.send({ data: dataForResponse, schema: response.schema, token: response.token });
     };
@@ -29,10 +29,10 @@ module.exports = class ParserManager {
     myProcess.callback = function(response) {
       const dataForResponse = response.data.map(el => el.data);
 
-       // TODO: save preset to database, get Id.
-       // call  this._saveAllDataModels()
+      // TODO: save preset to database, get Id.
+      // call  this._saveAllDataModels()
 
-      res.render('lol', { response: { data: dataForResponse, schema: response.schema, token: response.token }})
+      res.render('lol', { response: JSON.stringify({ data: dataForResponse, schema: response.schema, token: response.token }) })
     };
     myProcess.start(data);
   }
