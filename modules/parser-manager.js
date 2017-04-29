@@ -12,30 +12,29 @@ module.exports = class ParserManager {
   }
 
   process(data, res) {
-    const process = this._getProcess(res);
-    process.callback = function(response) {
+    const myProcess = this._getProcess(res);
+    myProcess.callback = function(response) {
       const dataForResponse = response.data.map(el => el.data);
 
        // TODO: save preset to database, get Id.
        // call  this._saveAllDataModels()
 
-      process.res.send({ data: dataForResponse, schema: response.schema });
+      myProcess.res.send({ data: dataForResponse, schema: response.schema, token: response.token });
     };
-    process.start(data);
+    myProcess.start(data);
   }
 
   processFile(data, res) {
-    const process = this._getProcess(res);
-    process.callback = function(response) {
+    const myProcess = this._getProcess(res);
+    myProcess.callback = function(response) {
       const dataForResponse = response.data.map(el => el.data);
 
        // TODO: save preset to database, get Id.
        // call  this._saveAllDataModels()
 
-      // process.res.send({ data: dataForResponse, schema: response.schema });
-      process.res.redirect('/lol.html');
+      res.render('lol', { response: { data: dataForResponse, schema: response.schema, token: response.token }})
     };
-    process.start(data);
+    myProcess.start(data);
   }
 
   /**
