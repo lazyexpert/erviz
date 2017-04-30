@@ -1,5 +1,7 @@
+/**
+ * This file is launched as a subprocess
+ */
 const crypto = require('crypto');
-const hash = crypto.createHash('sha256');
 const uuidV1 = require('uuid/v1');
 process.on('message', processData);
 
@@ -38,11 +40,14 @@ function start(data) {
     const data = [];
     const keys = Object.keys(el);
     keys.forEach(key => data.push(el[key]));
-    const dataHash = hash.update(JSON.stringify(data));
+
+    const md5sum = crypto.createHash('md5');
+    md5sum.update(JSON.stringify(data));
+    const dataHash = md5sum.digest('hex');
     return {
       hash: dataHash,
       presetIds : [],
-      data: data
+      data
     };
   }), schema, token });
   stop();
@@ -74,14 +79,14 @@ function createSchema(item) {
       "createdAt": Date.now(),
       "description": "Example of the datasource description"
     },
-    "schema" : { }
+    "mySchema" : { }
   };
 
   const keys = Object.keys(item);
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-    res.schema[key] = {
+    res.mySchema[key] = {
       dataType: null,
       index: i,
       visibility: false

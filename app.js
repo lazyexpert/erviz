@@ -14,7 +14,7 @@ const PresetModel = require('./models/preset-model');
 const dataSourceModel = new DataSourceModel(config.mongo.connectionString);
 const presetModel = new PresetModel(config.mongo.connectionString);
 
-const parserManager = new ParserManager();
+const parserManager = new ParserManager(dataSourceModel, presetModel);
 const errorHandler = new ErrorHandler();
 const routes = new Routes();
 const middlewares = [

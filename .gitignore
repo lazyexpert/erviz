@@ -2,5 +2,6 @@ node_modules
 .vscode
 npm-debug.log
 public/bundle.js
+public/bundle.js.map
 .idea/
 bundle.js

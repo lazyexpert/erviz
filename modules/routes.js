@@ -1,8 +1,4 @@
-const path = require('path');
-const formidable = require('formidable');
-const promisify = require('promisify-node');
 const Promise = require('bluebird');
-const fs = promisify('fs');
 const csvjson = require('csvjson');
 
 module.exports = class Routes {
@@ -25,7 +21,6 @@ module.exports = class Routes {
         const data = JSON.parse(req.files.sampleFile.data.toString());
         return parserManager.processFile(data, res);
       } else if (/\.csv/.test(req.files.sampleFile.name)) {
-        console.log(req.files)
         req.files.sampleFile.data.toString();
         const options = {
           delimiter : ','
