@@ -259,6 +259,15 @@ input.cmn-toggle-round + label:after {
   outline: none;
   cursor: pointer;
   width: 100%;
+  width: 164px;
+  padding: 8px 0;
+  display: inline-block;
+  text-align: center;
+  margin: 0;
+
+  &.right {
+    float: right;
+  }
 }
 
 .hi-block__show-btn {
@@ -306,4 +315,22 @@ input.cmn-toggle-round + label:after {
     margin-top: 10px;
     margin-bottom: 3px;
   }
+}
+
+.hide {
+  visibility: hidden;
+  position: absolute;
+}
+
+.main-wrapper {
+  margin: 0;
+  height: 100vh;
+  background: url('/images/main.jpg');
+  background-size: cover;
+}
+
+.filter {
+  margin: 0;
+  height: 100vh;
+  background-color: rgba(19, 18, 18, .5);
 }
