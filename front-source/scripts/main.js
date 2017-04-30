@@ -173,6 +173,15 @@ function animate(data, frameCount=10, secondsPerFrame=1500) {
         window.data = data
         draw(data)
     }
+    document.querySelector('.animation-block__btn').addEventListener('click', () => {
+        updateScheme()
+        data = payload.data.map(x => makeDatum(x, payload.schema.mySchema))
+        animate(
+            data,
+            +document.querySelector('.animation-block__input-2').value,
+            +document.querySelector('.animation-block__input-1').value
+        )
+    })
 })()
 
 
