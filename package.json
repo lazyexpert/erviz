@@ -46,6 +46,7 @@
     "express-fileupload": "^0.1.2",
     "helmet": "^3.5.0",
     "mongoose": "^4.9.6",
+    "tether-select": "^1.1.0",
     "uuid": "^3.0.1"
   }
 }

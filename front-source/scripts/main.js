@@ -1,5 +1,16 @@
-import "../scss/main.scss"
+import "../scss/nice-select.scss";
+import "../scss/menu.scss";
+import "../scss/main.scss";
 import makeDatum, {getMinMax, normalize} from './schemeParser'
+import TypePicker from './typePicker'
+
+import { Menu } from "./menu.js"
+import Select from 'tether-select'
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  new Menu()
+});
+
 
 let payload = window.responseObject
 
@@ -120,15 +131,14 @@ function animate() {
 
 (function main() {
     let selected = null
-    payload.schema.schema.latitude.dataType = 'LATITUDE'
-    payload.schema.schema.longitude.dataType = 'LONGITUDE'
-    payload.schema.schema.brightness.dataType = 'RADIUS'
-    payload.schema.schema.bright_t31.dataType = 'INTENSITY'
-    let data = payload.data.map(x => makeDatum(x, payload.schema.schema))
-    window.data = data
-    draw(data)
+    let typePicker = new TypePicker(payload.schema.schema)
+    typePicker.createControls()
     initPicker(viewer.scene, (selected_) => {
-        selected = selected_
-        console.log(selected)
+      selected = selected_
     })
+    document.querySelector('.menu__button').onclick = () => {
+        console.log('here')
+        let data = payload.data.map(x => makeDatum(x, payload.schema.schema))
+        draw(data)
+    }
 })()
