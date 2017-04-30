@@ -128,7 +128,7 @@ function animate() {
 
 (function main() {
     let selected = null
-    let typePicker = new TypePicker(payload.schema.schema)
+    let typePicker = new TypePicker(payload.schema.mySchema)
     typePicker.createControls()
     initPicker(viewer.scene, (selected_) => {
       selected = selected_
@@ -151,7 +151,7 @@ function animate() {
         }
     })
     document.querySelector('.menu__button').onclick = () => {
-        data = payload.data.map(x => makeDatum(x, payload.schema.schema))
+        data = payload.data.map(x => makeDatum(x, payload.schema.mySchema))
         draw(data)
     }
 })()
