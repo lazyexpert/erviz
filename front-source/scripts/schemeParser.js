@@ -114,14 +114,14 @@ export function getMinMax(data, field) {
     for (let i = 0; i < data.length; i++) {
         let elem = data[i]
         if (!elem[field]) continue
-        if (+elem[field] < +data[minIndex][field]) {
+        if (elem[field] < data[minIndex][field]) {
             minIndex = i
         }
-        if (+elem[field] > +data[maxIndex][field]) {
+        if (elem[field] > data[maxIndex][field]) {
             maxIndex = i
         }
     }
-    return [+data[minIndex][field], +data[maxIndex][field]]
+    return [data[minIndex][field], data[maxIndex][field]]
 }
 
 export function normalize(elem, field, minMax) {
