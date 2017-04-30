@@ -68,33 +68,36 @@
 
 #menuToggle {
 	position: absolute;
-	top: 10px;
-	right: 10px;
-	z-index: 11;
-	display: block;
-	text-align: center;
-	font-size: 14px;
-	color: #ffffff;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	cursor: pointer;
-	background: red;
+  top: 10px;
+  left: 409px;
+  z-index: 11;
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  width: 165px;
+  border-radius: 2px;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  background: rgba(52, 109, 148, 0.9);
 	-webkit-transition: all .1s ease-in-out;
 	   -moz-transition: all .1s ease-in-out;
 		-ms-transition: all .1s ease-in-out;
 		 -o-transition: all .1s ease-in-out;
 			transition: all .1s ease-in-out;
-	display: none;
+	visibility: hidden;
+	opacity: 0;
 }
 
 #menuToggle.active {
-	display: block;
+	visibility: visible;
+	opacity: 1;
 }
 
-#menuToggle:hover {
+#menuToggle:hover, #menuToggle:active {
 	color: #ffffff;
-	background: red;
+	background: rgba(52, 109, 148, 1);
 	-webkit-transition: all .1s ease-in-out;
 	   -moz-transition: all .1s ease-in-out;
 		-ms-transition: all .1s ease-in-out;
