@@ -24,6 +24,7 @@
 	height: 100%;
 	padding: 20px;
   box-sizing: border-box;
+	overflow: scroll;
 
 	h1 {
 		margin-top: 0;
@@ -84,6 +85,11 @@
 		-ms-transition: all .1s ease-in-out;
 		 -o-transition: all .1s ease-in-out;
 			transition: all .1s ease-in-out;
+	display: none;
+}
+
+#menuToggle.active {
+	display: block;
 }
 
 #menuToggle:hover {

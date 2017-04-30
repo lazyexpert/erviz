@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 let payload = window.responseObject
+let data
 
 function randomColor() {
     return Math.random()
@@ -49,7 +50,11 @@ function initPicker(scene, cb) {
     handler.setInputAction(function (movement) {
         let pick = scene.pick(movement.position)
         if (cb) {
-            cb(pick.id)
+            if (pick) {
+                cb(pick.id)
+            } else {
+                cb(null)
+            }
         }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 }
@@ -81,20 +86,12 @@ function draw(data) {
             MIN_INTENSITY + normalize(elem, '$intensity', minMaxIntensity) * (MAX_INTENSITY - MIN_INTENSITY) :
             undefined
         )
-        // console.log(elem.$longitude)
-        // console.log(elem.$latitude)
-        // console.log(radius)
         let ellipse = getGeometry(
             elem.$longitude,
             elem.$latitude,
             radius
         )
-        // console.log('')
-        // console.log(ellipse)
-        // console.log(intensity)
         let instance = getInstance(ellipse, i, [0.54, 0.45, 0.69], intensity)
-        // console.log(instance)
-        // console.log('')
         entities.push(scene.primitives.add(new Cesium.GroundPrimitive({
             geometryInstances : [instance]
         })))
@@ -135,10 +132,26 @@ function animate() {
     typePicker.createControls()
     initPicker(viewer.scene, (selected_) => {
       selected = selected_
+        let container = document.querySelector('.point-block__desc')
+        if (selected) {
+            container.innerHTML = ''
+            document.querySelector('.point-block').removeAttribute('hidden')
+            let elem = data[selected]
+            for (let item of elem.items()) {
+                let key = item[0]
+                let val = item[1]
+                container.insertAdjacentHTML(
+                    'beforeEnd',
+                    `<p><strong>${key}:</strong> ${val}</p>`
+                )
+            }
+        } else {
+            container.innerHTML = ''
+            document.querySelector('.point-block').setAttribute('hidden', true)
+        }
     })
     document.querySelector('.menu__button').onclick = () => {
-        console.log('here')
-        let data = payload.data.map(x => makeDatum(x, payload.schema.schema))
+        data = payload.data.map(x => makeDatum(x, payload.schema.schema))
         draw(data)
     }
 })()

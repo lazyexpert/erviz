@@ -7,10 +7,16 @@ export class Menu {
     const menu = document.getElementById('theMenu')
     const menuToggle = document.getElementById('menuToggle')
     const body = document.body
+    const menuButton = document.getElementById('menu__button')
+
+    menuButton.addEventListener("click", () => {
+      this.removeClass(menu, "menu-open")
+      this.addClass(menuToggle, "active")
+    })
 
     menuToggle.addEventListener("click", () => {
       if (this.hasClass(menuToggle, 'active')) {
-        this.removeClass(menu, "menu-open")
+        this.addClass(menu, "menu-open")
         this.removeClass(menuToggle, "active")
       } else {
         this.addClass(menu, "menu-open")
