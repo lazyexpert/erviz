@@ -11,7 +11,8 @@ const ParserManager = require('./modules/parser-manager');
 const DataSourceModel = require('./models/data-source-model');
 const PresetModel = require('./models/preset-model');
 
-const connectionString = process.env.MONGODB_CONNECTION_STRING || config.mongo.connectionString;
+const connectionString = process.env.MONGODB_CONNECTION_STRING ||config.mongo.connectionString;
+
 const dataSourceModel = new DataSourceModel(connectionString);
 const presetModel = new PresetModel(connectionString);
 

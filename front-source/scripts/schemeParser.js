@@ -10,6 +10,8 @@ class DatumObject {
         this.hasIntensity = false
         this.radiusField = null
         this.hasRadius = false
+        this.timeField = null
+        this.hasTime = false
         for (let key of Reflect.ownKeys(scheme)) {
             this.scheme[key] = scheme[key]
             switch (scheme[key].dataType) {
@@ -28,6 +30,10 @@ class DatumObject {
             case 'RADIUS':
                 this.hasRadius = true
                 this.radiusField = scheme[key]
+
+            case 'TIME':
+                this.hasTime = true
+                this.timeField = scheme[key]
             }
         }
     }
@@ -35,7 +41,9 @@ class DatumObject {
     items() {
         let res = []
         for (let key of Reflect.ownKeys(this.scheme)) {
-            res.push([key, this.datum[this.scheme[key].index]])
+            if (this.scheme[key].visibility) {
+                res.push([key, this.datum[this.scheme[key].index]])
+            }
         }
         return res
     }
@@ -66,6 +74,13 @@ class DatumObject {
                 return this.datum[this.intensityField.index]
             else
                 return null
+
+        case '$time':
+            if (this.hasTime){
+                return this.datum[this.timeField.index]
+            } else {
+                return null
+            }
 
         default:
             return this.datum[this.scheme[key].index]
