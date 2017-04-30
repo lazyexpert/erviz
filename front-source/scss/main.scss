@@ -110,15 +110,15 @@ input.cmn-toggle-round + label:after {
   }
 
   &:hover + label:after {
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 9px;
-    background: #346d94;
-    width: 2px;
-    height: 2px;
-    box-shadow: 2px 0 0 #346d94, 4px 0 0 #346d94, 4px -2px 0 #346d94, 4px -4px 0 #346d94, 4px -6px 0 #346d94, 4px -8px 0 #346d94;
-    transform: rotate(45deg);
+    // content: "";
+    // position: absolute;
+    // left: 5px;
+    // top: 9px;
+    // background: #346d94;
+    // width: 2px;
+    // height: 2px;
+    // box-shadow: 2px 0 0 #346d94, 4px 0 0 #346d94, 4px -2px 0 #346d94, 4px -4px 0 #346d94, 4px -6px 0 #346d94, 4px -8px 0 #346d94;
+    // transform: rotate(45deg);
   }
 
   // Box checked
@@ -422,4 +422,8 @@ input.cmn-toggle-round + label:after {
   width: 46%;
   display: inline-block;
   float: right;
+}
+
+.cesium-viewer-bottom {
+  display: none!important;
 }
