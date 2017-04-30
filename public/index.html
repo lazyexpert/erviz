@@ -19,17 +19,17 @@
         action='http://localhost:3000/api/upload'
         method='post'
         encType="multipart/form-data">
-          <input class="hide" id="readFile" type="file" name="sampleFile" />
+          <input class="hide" id="readFile" type="file" name="sampleFile"/>
           <input class="hide" id="submitForm" type='submit' value='Upload!' />
           <label for="">Project name:</label>
-          <input class="first-input" type="text">
-          <label for="">Add description:</label>
+          <input name="name" class="first-input" type="text">
+          <label name="description" for="">Add description:</label>
           <textarea type="text"></textarea>
           <div class="first-btn-container">
             <a onclick="readFile()" class="hi-block__download-btn">Download dataset</a>
-            <a onclick="submitForm()" class="hi-block__download-btn right">Go to map!</a>
+            <a onclick="submitForm()" class="hi-block__download-btn right">Show the data!</a>
           </div>
-          <div><button class="hi-block__show-btn">Show me Earth!</button></div>
+          <div class="btn-desc"><span>Don’t have a data?</span><a class="hi-block__show-btn">Show me Earth!</a></div>
       </form>
     </div>
   </div>
