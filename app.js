@@ -11,12 +11,13 @@ const ParserManager = require('./modules/parser-manager');
 const DataSourceModel = require('./models/data-source-model');
 const PresetModel = require('./models/preset-model');
 
-const dataSourceModel = new DataSourceModel(config.mongo.connectionString);
-const presetModel = new PresetModel(config.mongo.connectionString);
+const connectionString = process.env.MONGODB_CONNECTION_STRING || config.mongo.connectionString;
+const dataSourceModel = new DataSourceModel(connectionString);
+const presetModel = new PresetModel(connectionString);
 
 const parserManager = new ParserManager(dataSourceModel, presetModel);
 const errorHandler = new ErrorHandler();
-const routes = new Routes();
+const routes = new Routes(dataSourceModel, presetModel);
 const middlewares = [
   errorHandler
 ];

@@ -2,7 +2,6 @@
  * This file is launched as a subprocess
  */
 const crypto = require('crypto');
-const uuidV1 = require('uuid/v1');
 process.on('message', processData);
 
 let IS_PROCESS_STOPPED = false;
@@ -33,8 +32,6 @@ function start(data) {
   console.log('process job started');
   const items = getItems(data);
   const schema = createSchema(items[0]); 
-  const token = uuidV1();
-  schema.token = token;
 
   process.send({ data: items.map(el => {
     const data = [];
@@ -49,7 +46,7 @@ function start(data) {
       presetIds : [],
       data
     };
-  }), mySchema: schema, token });
+  }), schema });
   stop();
 }
 

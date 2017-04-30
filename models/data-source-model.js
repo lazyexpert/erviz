@@ -4,7 +4,7 @@ const Schema = require('mongoose').Schema;
 const modelFactory = connection => {
   const schema = new Schema({
     hash: String,
-    presetIds : [],
+    presetIds : [String],
     data: []
   });
   return connection.model('DataSource', schema);

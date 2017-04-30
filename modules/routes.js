@@ -1,19 +1,41 @@
 const Promise = require('bluebird');
 const csvjson = require('csvjson');
+const ObjectId = require('mongoose').Schema.Types.ObjectId;
 
 module.exports = class Routes {
+  constructor(dataSourceModel, presetModel) {
+    this._dataSourceModel = dataSourceModel;
+    this._presetModel = presetModel;
+  }
+
   init(app, parserManager) {
-    app.get('/api/preset/:id', (req, res) => {
-      // TODO: get data from DB by preset id
-      const data = { lalala: 1 };
-      res.send(data);
+    app.get('/preset/:id', (req, res) => {
+      const self = this;
+
+      Promise.coroutine(function*() {
+        let schema, data;
+
+        yield self._presetModel.execute(Promise.coroutine(function*(PresetModel) {
+          schema = yield PresetModel.findOne({_id: ObjectId(req.params.id)});
+        }));
+        yield self._dataSourceModel.execute(Promise.coroutine(function*(DataSourceModel) {
+          const result = yield DataSourceModel.find({ presetIds: req.params.id });
+
+          data = result.map(el => el.data);
+        }));
+        res.render('lol', { response: JSON.stringify({ data, schema }) });
+      })();
     });
+
+    app.put('/preset/:id', (req, res) => {
+
+    })
 
     app.post('/api/source-data/', (req, res) => {
       parserManager.process(req.body, res);
     })
 
-    app.post('/api/upload', function(req, res) {
+    app.post('/earth-with-your-data', function(req, res) {
       if (!req.files)
         return res.status(400).send('No files were uploaded.');
       
