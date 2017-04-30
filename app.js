@@ -18,7 +18,7 @@ const presetModel = new PresetModel(connectionString);
 
 const parserManager = new ParserManager(dataSourceModel, presetModel);
 const errorHandler = new ErrorHandler();
-const routes = new Routes();
+const routes = new Routes(dataSourceModel, presetModel);
 const middlewares = [
   errorHandler
 ];

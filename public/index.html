@@ -16,7 +16,7 @@
       </div>
       <form class="hi-block__form" ref='uploadForm'
         id='uploadForm'
-        action='/api/upload'
+        action='/earth-with-your-data'
         method='post'
         encType="multipart/form-data">
           <input class="hide" id="readFile" type="file" name="sampleFile"/>
@@ -29,7 +29,7 @@
             <a onclick="readFile()" class="hi-block__download-btn">Upload dataset</a>
             <a onclick="submitForm()" class="hi-block__download-btn right">Show the data!</a>
           </div>
-          <div class="btn-desc"><span>Don’t have a data?</span><a class="hi-block__show-btn">Show me Earth!</a></div>
+          <div class="btn-desc"><span>Don’t have a data?</span><a href="/earth" class="hi-block__show-btn">Show me Earth!</a></div>
       </form>
     </div>
   </div>
