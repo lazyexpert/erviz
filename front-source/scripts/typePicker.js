@@ -33,6 +33,7 @@ export default class Picker {
                         <option value="LONGITUDE">longitude</option>
                         <option value="INTENSITY">intensity</option>
                         <option value="RADIUS">radius</option>
+                        <option value="TIME">timelapse var</option>
                         </select>
                     </li>
                     <li>

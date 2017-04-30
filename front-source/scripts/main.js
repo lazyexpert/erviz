@@ -112,17 +112,24 @@ function clear() {
     viewer.scene.primitives.removeAll()
 }
 
-function animate() {
-    let time = 0;
+function animate(data, frameCount=10, secondsPerFrame=1500) {
+    let frame = 0
+    let [minTime, maxTime] = getMinMax(data, '$time')
+    let step = (maxTime - minTime) / frameCount
+    if (!minTime) {
+        return
+    }
     setInterval(() => {
-        time++;
-        for (let i = 0; i < data.length; i++) {
-            data[i].latitude += time * 0.01;
-            data[i].longitude += time * 0.01;
+        frame++;
+        let dataToDraw = data.filter(x => (
+            x.$time >= minTime + frame * step &&
+            x.$time < minTime + (frame + 1) * step
+        ))
+        if (dataToDraw.length) {
+            clear()
+            draw(dataToDraw)
         }
-        clear()
-        draw(data)
-    }, 1000)
+    }, secondsPerFrame)
 }
 
 
@@ -152,6 +159,10 @@ function animate() {
     })
     document.querySelector('.menu__button').onclick = () => {
         data = payload.data.map(x => makeDatum(x, payload.schema.mySchema))
+        window.data = data
         draw(data)
     }
 })()
+
+
+window.animate = animate
