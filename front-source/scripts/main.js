@@ -114,7 +114,7 @@ function clear() {
 function updateScheme() {
     console.log(payload.schema)
     // $.ajax({
-    //     url: `/api/preset/${payload.schema.mySchema.id}`,
+    //     url: `/preset/${payload.schema.mySchema.id}`,
     //     success: res => {
     //         payload.schema.mySchema.id = res
     //         history.pushState({}, 'q', res)
