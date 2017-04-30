@@ -1,9 +1,13 @@
 const ModelBase = require('./base-model');
+const Schema = require('mongoose').Schema;
 
 const modelFactory = connection => {
-  return connection.model('DataSource', {
-    
+  const schema = new Schema({
+    hash: String,
+    presetIds : [],
+    data: []
   });
+  return connection.model('DataSource', schema);
 };
 
 module.exports = class DataSourceModel extends ModelBase {

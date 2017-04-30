@@ -27,7 +27,8 @@ module.exports = class ExpressBootstrapper {
     this._app.use(bodyParser.json());
     this._app.use(bodyParser.urlencoded({extended: false}));
 
-    mongoose.createConnection(this._config.mongo.connectionString, { server: { poolSize: this._config.mongo.poolSize }});
+    const connectionString = process.env.MONGODB_CONNECTION_STRING || this._config.mongo.connectionString;
+    mongoose.createConnection(connectionString, { server: { poolSize: this._config.mongo.poolSize }});
     this._app.use(express.static('public'));
 
     this._initMiddlewares();
