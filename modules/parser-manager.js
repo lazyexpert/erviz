@@ -43,7 +43,6 @@ module.exports = class ParserManager {
   *_savePreset(response, cb) {
     const self = this;
     this._presetModel.execute(Promise.coroutine(function*(Preset) {
-      // console.log(response);
       const presetModel = new Preset(response.schema);
       const id = presetModel._id;
       yield presetModel.save();

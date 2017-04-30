@@ -16,11 +16,11 @@ module.exports = class Routes {
         let schema, data;
 
         yield self._presetModel.execute(Promise.coroutine(function*(PresetModel) {
-          schema = yield PresetModel.findOne({_id: ObjectId(req.params.id)});
+          schema = yield PresetModel.findOne({_id: req.params.id});
+          console.log("schema", schema);
         }));
         yield self._dataSourceModel.execute(Promise.coroutine(function*(DataSourceModel) {
           const result = yield DataSourceModel.find({ presetIds: req.params.id });
-
           data = result.map(el => el.data);
         }));
         res.render('lol', { response: JSON.stringify({ data, schema }) });
