@@ -34,7 +34,6 @@ module.exports = class ParserManager {
     const myProcess = this._getProcess(res);
     myProcess.callback = function(response) {
       const dataForResponse = response.data.map(el => el.data);
-
       self._savePreset(response, function() {
         res.render('lol', { response: JSON.stringify({ data: dataForResponse, schema: response.mySchema, token: response.token }) });
       }.bind(self));

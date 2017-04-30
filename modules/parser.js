@@ -49,7 +49,7 @@ function start(data) {
       presetIds : [],
       data
     };
-  }), schema, token });
+  }), mySchema: schema, token });
   stop();
 }
 
