@@ -27,6 +27,10 @@ module.exports = class Routes {
       })();
     });
 
+    app.get('/earth', (req, res) => {
+      res.render('lol', { response: "null" });
+    })
+
     app.put('/preset/:id', (req, res) => {
 
     })
