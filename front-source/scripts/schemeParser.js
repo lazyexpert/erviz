@@ -32,6 +32,14 @@ class DatumObject {
         }
     }
 
+    items() {
+        let res = []
+        for (let key of Reflect.ownKeys(this.scheme)) {
+            res.push([key, this.datum[this.scheme[key].index]])
+        }
+        return res
+    }
+
     get(key) {
         switch (key) {
         case '$latitude':
