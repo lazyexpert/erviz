@@ -3,6 +3,7 @@ export default class Picker {
         this.fields = []
         this.schemeRef = scheme
         for (let key of Reflect.ownKeys(scheme)) {
+            scheme[key].visibility = true
             this.fields.push(Object.assign({}, scheme[key], {
                 name: key
             }))
@@ -16,6 +17,10 @@ export default class Picker {
             }
         }
         this.schemeRef[key].dataType = dataType
+    }
+
+    updateVisibility(key, visibility) {
+        this.schemeRef[key].visibility = visibility
     }
 
     createControls() {
@@ -37,14 +42,24 @@ export default class Picker {
                         </select>
                     </li>
                     <li>
-                        <input class="styled-checkbox" id="use-field-${field.name}" type="checkbox" value="value1">
+                        <input
+                            class="styled-checkbox"
+                            id="use-field-${field.name}"
+                            type="checkbox"
+                            value="value1"
+                            checked>
                         <label for="use-field-${field.name}"></label>
                     </li>
                 </ul>`
             )
-            let select = container.lastChild.querySelector('select')
+            let elem = container.lastChild
+            let select = elem.querySelector('select')
             select.onchange = () => {
                 this.updateDataType(field.name, select.value)
+            }
+            let input = elem.querySelector('input')
+            input.onchange = () => {
+                this.updateVisibility(field.name, input.checked)
             }
         }
     }

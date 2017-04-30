@@ -107,9 +107,19 @@ function filter() {
     }
 }
 
-
 function clear() {
     viewer.scene.primitives.removeAll()
+}
+
+function updateScheme() {
+    console.log(payload.schema)
+    // $.ajax({
+    //     url: `/preset/${payload.schema.mySchema.id}`,
+    //     success: res => {
+    //         payload.schema.mySchema.id = res
+    //         history.pushState({}, 'q', res)
+    //     }
+    // })
 }
 
 function animate(data, frameCount=10, secondsPerFrame=1500) {
@@ -158,6 +168,7 @@ function animate(data, frameCount=10, secondsPerFrame=1500) {
         }
     })
     document.querySelector('.menu__button').onclick = () => {
+        updateScheme()
         data = payload.data.map(x => makeDatum(x, payload.schema.mySchema))
         window.data = data
         draw(data)
