@@ -1,12 +1,47 @@
-<html>
-  <body>
-    <form ref='uploadForm'
-      id='uploadForm'
-      action='http://localhost:3000/api/upload'
-      method='post'
-      encType="multipart/form-data">
-        <input type="file" name="sampleFile" />
-        <input type='submit' value='Upload!' />
-    </form>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/front-source/scss/main.css">
+  <title>ERVIZ</title>
+</head>
+<body class="main-wrapper">
+  <div class="filter">
+    <div class="hi-block">
+      <div class="hi-block__text">
+        <h1>ERVIZ</h1>
+        <p>create Earth vizualization using your data in json, csv or xls</p>
+      </div>
+      <form class="hi-block__form" ref='uploadForm'
+        id='uploadForm'
+        action='http://localhost:3000/api/upload'
+        method='post'
+        encType="multipart/form-data">
+          <input class="hide" id="readFile" type="file" name="sampleFile" />
+          <input class="hide" id="submitForm" type='submit' value='Upload!' />
+          <label for="">Project name:</label>
+          <input class="first-input" type="text">
+          <label for="">Add description:</label>
+          <textarea type="text"></textarea>
+          <div class="first-btn-container">
+            <a onclick="readFile()" class="hi-block__download-btn">Download dataset</a>
+            <a onclick="submitForm()" class="hi-block__download-btn right">Go to map!</a>
+          </div>
+          <div><button class="hi-block__show-btn">Show me Earth!</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function readFile(){
+      document.getElementById('readFile').click();
+    }
+
+    function submitForm(){
+      document.getElementById('submitForm').click();
+    }
+  </script>
+</body>
 </html>
