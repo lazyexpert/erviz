@@ -91,7 +91,7 @@ function draw(data) {
             elem.$latitude,
             radius
         )
-        let instance = getInstance(ellipse, i, [0.54, 0.45, 0.69], intensity)
+        let instance = getInstance(ellipse, i, [.96, .32, .3], intensity)
         entities.push(scene.primitives.add(new Cesium.GroundPrimitive({
             geometryInstances : [instance]
         })))
@@ -112,7 +112,6 @@ function clear() {
 }
 
 function updateScheme() {
-    console.log(payload.schema)
     // $.ajax({
     //     url: `/preset/${payload.schema.mySchema.id}`,
     //     success: res => {
@@ -126,18 +125,29 @@ function animate(data, frameCount=10, secondsPerFrame=1500) {
     let frame = 0
     let [minTime, maxTime] = getMinMax(data, '$time')
     let step = (maxTime - minTime) / frameCount
+    console.log('here')
     if (!minTime) {
         return
     }
-    setInterval(() => {
+    console.log('there')
+    let interval
+    console.log(minTime, maxTime)
+    interval = setInterval(() => {
+        console.log(frame)
         frame++;
-        let dataToDraw = data.filter(x => (
-            x.$time >= minTime + frame * step &&
-            x.$time < minTime + (frame + 1) * step
-        ))
+        let dataToDraw = data.filter(x => {
+            return (
+                (+x.$time) >= minTime + frame * step &&
+                (+x.$time) < minTime + (frame + 1) * step
+            )}
+        )
+        console.log(dataToDraw)
         if (dataToDraw.length) {
             clear()
             draw(dataToDraw)
+        }
+        if (frame == frameCount) {
+            clearInterval(interval)
         }
     }, secondsPerFrame)
 }
