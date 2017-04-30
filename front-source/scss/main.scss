@@ -267,21 +267,26 @@ input.cmn-toggle-round + label:after {
 
   &.right {
     float: right;
+    background: rgba(39,174,96,.9);
   }
 }
 
 .hi-block__show-btn {
-  background: rgba(39,174,96,.9);
-  border: none;
-  color: #fff;
-  padding: 8px 43px;
-  border-radius: 2px;
-  font-size: 16px;
-  margin-top: 10px;
-  margin-right: 9px;
-  outline: none;
   cursor: pointer;
-  width: 100%;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  margin-left: 15px;
+
+  &:hover, &:active {
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+  }
+}
+
+.btn-desc {
+  font-size: 12px;
+  margin-top: 13px;
+  display: block;
+  text-align: right;
 }
 
 .first-btn-container {
