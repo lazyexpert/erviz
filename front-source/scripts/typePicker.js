@@ -16,6 +16,16 @@ export default class Picker {
                 field.dataType = dataType
             }
         }
+        let shown = false
+        for (let field of this.fields) {
+            if (field.dataType == 'TIME') {
+                document.querySelector('.animation-block').removeAttribute('hidden')
+                shown = true
+            }
+        }
+        if (!shown) {
+            document.querySelector('.animation-block').setAttribute('hidden', true)
+        }
         this.schemeRef[key].dataType = dataType
     }
 
